@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEM-366: Repaso de Prerrequisitos de Termodinámica II</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            scroll-margin-top: 80px;
+        }
+        .katex-display {
+            display: block;
+            margin: 1em 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-900 to-gray-800 text-white p-6">
+        <div class="max-w-3xl w-full bg-gray-900 bg-opacity-70 rounded-2xl shadow-2xl p-8 backdrop-blur-sm">
+            <h1 class="text-4xl font-bold text-center mb-4">Bienvenido al Repaso de Prerrequisitos de IEM-366: Termodinámica II</h1>
+            <div class="text-lg space-y-3 text-gray-300">
+                <p>"Este módulo es un prerrequisito obligatorio para Termodinámica II. Su propósito es asegurar que domina los conceptos fundamentales de Termodinámica I, esenciales para el éxito en este curso."</p>
+                <p>"Navegue a través de las secciones de repaso usando la tabla de contenido. El material se basa en el documento 'Repaso Termo I'."</p>
+                <p>"Después de que haya revisado a fondo el contenido, procederá a una evaluación cronometrada."</p>
+                <p>"La evaluación consta de 20 preguntas de opción múltiple y verdadero/falso seleccionadas al azar de un banco de preguntas más grande. Tendrá 45 minutos para completarla."</p>
+                <p class="font-semibold text-yellow-300">"Su puntuación será registrada. Se requiere una puntuación mínima de 70 para aprobar."</p>
+            </div>
+            <div class="mt-8">
+                <h2 class="block text-xl font-medium mb-4 text-center">Ingrese sus Credenciales para Comenzar</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="lastNameInput" class="block text-lg font-medium mb-1">Uno de sus Apellidos</label>
+                        <input type="text" id="lastNameInput" placeholder="Ej: Perez" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    </div>
+                    <div>
+                        <label for="matriculaInput" class="block text-lg font-medium mb-1">Matrícula</label>
+                        <input type="text" id="matriculaInput" placeholder="Ej: 100123456" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    </div>
+                </div>
+                <div id="loginError" class="text-red-400 text-center hidden pt-4"></div>
+            </div>
+            <div class="mt-6 text-center">
+                <button id="beginReviewBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-xl transition-all duration-300 transform hover:scale-105">
+                    Comenzar Repaso
+                </button>
+                <button id="downloadResultsBtn" class="hidden mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300">
+                    Descargar Resultados (Profesor)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Module -->
+    <div id="reviewModule" class="hidden">
+        <div class="flex flex-col md:flex-row">
+            <!-- Sticky Sidebar -->
+            <nav class="w-full md:w-1/4 h-auto md:h-screen md:sticky top-0 bg-gray-800 text-white p-6 overflow-y-auto">
+                <h2 class="text-2xl font-bold mb-6">Tabla de Contenido</h2>
+                <ul class="space-y-3">
+                    <li><a href="#s1-1" class="hover:text-blue-300 block">1.1 Introducción</a></li>
+                    <li><a href="#s1-2" class="hover:text-blue-300 block">1.2 Sistemas y Definiciones</a></li>
+                    <li><a href="#s1-3" class="hover:text-blue-300 block">1.3 Propiedades Termodinámicas</a></li>
+                    <li><a href="#s1-4" class="hover:text-blue-300 block">1.4 La Sustancia Pura</a></li>
+                    <li><a href="#s1-5" class="hover:text-blue-300 block">1.5 Cambios de Fase</a></li>
+                    <li><a href="#s1-6" class="hover:text-blue-300 block">1.6 Gas Ideal</a></li>
+                    <li><a href="#s1-7" class="hover:text-blue-300 block">1.7 Primera Ley (Sistemas Cerrados)</a></li>
+                    <li><a href="#s1-9" class="hover:text-blue-300 block">1.9 Primera Ley (Sistemas Abiertos)</a></li>
+                    <li><a href="#s1-11" class="hover:text-blue-300 block">1.11 Balance de Energía en Dispositivos</a></li>
+                    <li><a href="#s1-12" class="hover:text-blue-300 block">1.12 Segunda Ley</a></li>
+                    <li><a href="#s1-13" class="hover:text-blue-300 block">1.13 Motores Térmicos y Refrigeradores</a></li>
+                </ul>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="w-full md:w-3/4 p-10 bg-white overflow-y-auto" style="max-height: 100vh;">
+                <div id="s1-1" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.1 Introducción</h2>
+                    <blockquote class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+                        <p class="font-semibold">Termodinámica:</p>
+                        <p>La ciencia de la energía. Proviene de las palabras griegas <em>therme</em> (calor) y <em>dynamis</em> (fuerza). Es el estudio de la energía, sus transformaciones y su relación con las propiedades físicas de la materia.</p>
+                    </blockquote>
+                    <h3 class="text-2xl font-semibold mt-6 mb-2">Aplicaciones Prácticas:</h3>
+                    <p>La termodinámica es fundamental para la ingeniería y la vida cotidiana, apareciendo en plantas de energía, motores de combustión interna, sistemas de refrigeración, acondicionadores de aire e incluso procesos biológicos en el cuerpo humano.</p>
+                </div>
+                
+                <div id="s1-2" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.2 Sistemas Termodinámicos y Definiciones</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow">
+                            <h3 class="text-2xl font-semibold mb-2">Sistema Cerrado (Masa de Control)</h3>
+                            <p>Un sistema donde se contiene una cantidad fija de masa. Ninguna masa puede cruzar su frontera. La energía, en forma de calor o trabajo, sí puede cruzar la frontera.</p>
+                            <p class="mt-2"><strong>Ejemplo:</strong> Un tanque sellado que contiene un gas, como un cilindro-pistón.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg shadow">
+                            <h3 class="text-2xl font-semibold mb-2">Sistema Abierto (Volumen de Control)</h3>
+                            <p>Un sistema donde tanto la masa como la energía pueden cruzar la frontera. La frontera es a menudo un dispositivo físico o una región arbitraria en el espacio.</p>
+                            <p class="mt-2"><strong>Ejemplo:</strong> Un calentador de agua, una turbina o una tobera.</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 bg-gray-50 p-6 rounded-lg shadow">
+                        <h3 class="text-2xl font-semibold mt-6 mb-4">Términos Importantes</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                           <li><strong>Estado:</strong> Condición de un sistema descrita por sus propiedades termodinámicas.</li>
+                           <li><strong>Equilibrio:</strong> Un estado donde no hay potenciales desequilibrados (o fuerzas impulsoras) dentro del sistema. Incluye equilibrio térmico, mecánico, de fase y químico.</li>
+                           <li><strong>Proceso:</strong> Cualquier cambio que un sistema experimenta de un estado de equilibrio a otro.</li>
+                           <li><strong>Trayectoria:</strong> La serie de estados por los que pasa un sistema durante un proceso.</li>
+                           <li><strong>Ciclo Termodinámico:</strong> Una secuencia de procesos que comienza y termina en el mismo estado.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="s1-3" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.3 Propiedades Termodinámicas</h2>
+                    <p>Cualquier característica de un sistema se llama propiedad. Algunas propiedades comunes son presión (P), temperatura (T), volumen (V) y masa (m).</p>
+                    <div class="grid md:grid-cols-2 gap-8 mt-4">
+                        <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                           <h3 class="text-xl font-semibold mb-2">Propiedades Intensivas</h3>
+                           <p>Son aquellas independientes de la masa de un sistema, como temperatura, presión y densidad.</p>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                           <h3 class="text-xl font-semibold mb-2">Propiedades Extensivas</h3>
+                           <p>Son aquellas cuyos valores dependen del tamaño —o extensión— del sistema, como la masa total, el volumen total y la energía total.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="s1-4" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.4 La Sustancia Pura</h2>
+                    <p>Una sustancia que tiene una composición química fija en todas partes se llama sustancia pura. El agua, el nitrógeno, el helio y el dióxido de carbono son ejemplos. Una sustancia pura puede existir en más de una fase, pero su composición química debe ser la misma en cada fase.</p>
+                </div>
+
+                <div id="s1-5" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.5 Cambios de Fase de Sustancias Puras</h2>
+                    <p>Las sustancias puras pueden existir en diferentes fases (sólido, líquido, gas). Añadir o quitar energía a presión constante puede causar un cambio de fase, como la ebullición o la condensación. Los estados clave incluyen:</p>
+                    <ul class="list-disc list-inside mt-4 space-y-2">
+                        <li><strong>Líquido Comprimido:</strong> No está a punto de vaporizarse.</li>
+                        <li><strong>Líquido Saturado:</strong> Está a punto de vaporizarse.</li>
+                        <li><strong>Mezcla Saturada Líquido-Vapor:</strong> Una mezcla donde las fases líquida y de vapor coexisten en equilibrio.</li>
+                        <li><strong>Vapor Saturado:</strong> Está a punto de condensarse.</li>
+                        <li><strong>Vapor Sobrecalentado:</strong> No está a punto de condensarse (está por encima de la temperatura de saturación para una presión dada).</li>
+                    </ul>
+                </div>
+                
+                <div id="s1-6" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.6 Gas Ideal</h2>
+                    <p>Un gas ideal es un gas teórico compuesto por partículas puntuales que se mueven al azar y no interactúan entre sí. Es una aproximación útil para muchos gases reales a bajas presiones y altas temperaturas.</p>
+                    <blockquote class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4 text-center">
+                        <p class="font-semibold text-xl">Ecuación de Estado del Gas Ideal:</p>
+                        <div class="text-2xl font-mono my-2">$$PV = n R_u T$$</div>
+                        <div class="text-2xl font-mono my-2">$$PV = m R T$$</div>
+                    </blockquote>
+                    <p>Donde $P$ es presión, $V$ es volumen, $T$ es temperatura absoluta, $m$ es masa, $n$ es número de moles, $R$ es la constante específica del gas y $R_u$ es la constante universal de los gases.</p>
+                </div>
+
+                <div id="s1-7" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.7 Primera Ley de la Termodinámica (Sistemas Cerrados)</h2>
+                    <p>La primera ley es una declaración de la conservación de la energía. Para un sistema cerrado que experimenta un ciclo, el calor neto de entrada es igual al trabajo neto de salida. Para un proceso, el cambio en la energía total del sistema es igual a la transferencia neta de energía.</p>
+                    <blockquote class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4 text-center">
+                        <p class="font-semibold text-xl">Primera Ley para un Proceso de Sistema Cerrado:</p>
+                        <div class="text-2xl font-mono my-2">$$Q_{neto} - W_{neto} = \Delta E_{sis}$$</div>
+                        <p>Donde:</p>
+                        <div class="text-2xl font-mono my-2">$$\Delta E_{sis} = \Delta U + \Delta EC + \Delta EP$$</div>
+                        <p>Si los cambios de energía cinética ($EC$) y potencial ($EP$) son despreciables:</p>
+                        <div class="text-2xl font-mono mt-2">$$Q - W = \Delta U$$</div>
+                    </blockquote>
+                </div>
+
+                <div id="s1-9" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.9 Primera Ley para Sistemas Abiertos (Volúmenes de Control)</h2>
+                    <p>Para sistemas abiertos, debemos tener en cuenta la energía transportada por la masa que fluye a través de las fronteras del volumen de control. Para un proceso de flujo estacionario, la masa y la energía dentro del volumen de control permanecen constantes en el tiempo.</p>
+                    <blockquote class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4 text-center">
+                        <p class="font-semibold text-xl">Ecuación de Energía de Flujo Estacionario (por unidad de masa):</p>
+                        <div class="text-lg font-mono my-2">$$q - w = (h_2 - h_1) + \frac{V_2^2 - V_1^2}{2} + g(z_2 - z_1)$$</div>
+                         <p>Donde $h$ es entalpía ($h = u + Pv$), $V$ es velocidad y $z$ es elevación.</p>
+                    </blockquote>
+                </div>
+
+                <div id="s1-11" class="content-section mb-12">
+                     <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.11 Balance de Energía para Dispositivos Termodinámicos Comunes</h2>
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold">Turbinas y Compresores</h3>
+                            <p><strong>Turbinas:</strong> Producen trabajo al expandir un fluido. Típicamente, la transferencia de calor es despreciable y los cambios de energía potencial/cinética son pequeños. La producción de trabajo se debe principalmente a una caída en la entalpía.</p>
+                            <p><strong>Compresores/Bombas:</strong> Consumen trabajo para aumentar la presión de un fluido. Se aplican suposiciones similares, con el trabajo de entrada aumentando la entalpía del fluido.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold">Intercambiadores de Calor</h3>
+                            <p>Dispositivos que transfieren calor entre dos fluidos sin que se mezclen. No se realiza trabajo. El calor perdido por el fluido caliente es ganado por el fluido frío.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold">Válvulas de Estrangulamiento</h3>
+                            <p>Dispositivos que restringen el flujo y causan una caída de presión significativa. Suelen ser cortos y bien aislados, por lo que la transferencia de calor y el trabajo son despreciables. Se asume que el proceso es isentálpico ($h_1 = h_2$).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="s1-12" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.12 Segunda Ley de la Termodinámica</h2>
+                    <p>La segunda ley introduce el concepto de la direccionalidad de los procesos y la calidad de la energía. Establece que los procesos ocurren en una cierta dirección y que la energía tiene calidad además de cantidad.</p>
+                     <div class="grid md:grid-cols-2 gap-8 mt-4">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow">
+                            <h3 class="text-xl font-semibold mb-2">Enunciado de Kelvin-Planck</h3>
+                            <p>Es imposible que cualquier dispositivo que opera en un ciclo reciba calor de un solo depósito y produzca una cantidad neta de trabajo.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg shadow">
+                            <h3 class="text-xl font-semibold mb-2">Enunciado de Clausius</h3>
+                            <p>Es imposible construir un dispositivo que opere en un ciclo y no produzca otro efecto que la transferencia de calor de un cuerpo de menor temperatura a un cuerpo de mayor temperatura.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="s1-13" class="content-section mb-12">
+                    <h2 class="text-3xl font-bold border-b-2 border-blue-600 pb-2 mb-4">1.13 Motores Térmicos y Máquinas de Refrigeración</h2>
+                    <div class="space-y-6">
+                         <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold">Motores Térmicos</h3>
+                            <p>Dispositivos que convierten calor en trabajo. Operan en un ciclo, tomando calor de una fuente de alta temperatura ($Q_H$), produciendo trabajo neto ($W_{neto,salida}$) y rechazando calor de desecho a un sumidero de baja temperatura ($Q_L$).</p>
+                            <blockquote class="bg-blue-50 border-l-4 border-blue-500 p-4 my-2 text-center">
+                                <p class="font-semibold">Eficiencia Térmica ($\eta_{th}$):</p>
+                                <div class="text-2xl font-mono my-2">$$\eta_{th} = \frac{W_{neto,salida}}{Q_H} = 1 - \frac{Q_L}{Q_H}$$</div>
+                            </blockquote>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold">Refrigeradores y Bombas de Calor</h3>
+                            <p>Dispositivos que transfieren calor de un medio de baja temperatura a uno de alta temperatura. El objetivo de un refrigerador es enfriar un espacio ($Q_L$), mientras que el de una bomba de calor es calentar un espacio ($Q_H$).</p>
+                             <blockquote class="bg-blue-50 border-l-4 border-blue-500 p-4 my-2 text-center">
+                                <p class="font-semibold">Coeficiente de Desempeño (COP):</p>
+                                <div class="text-xl font-mono my-2">$$COP_R = \frac{Q_L}{W_{neto,entrada}} \quad | \quad COP_{BC} = \frac{Q_H}{W_{neto,entrada}}$$</div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center pb-10">
+                    <button id="proceedToEvalBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-2xl transition-all duration-300 transform hover:scale-105">
+                        Proceder a la Evaluación
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Evaluation Module -->
+    <div id="evaluationModule" class="hidden min-h-screen flex flex-col items-center justify-center bg-gray-200 p-6">
+        <div class="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex justify-between items-center border-b-2 pb-4 mb-6">
+                <h2 class="text-3xl font-bold">Evaluación de Termodinámica</h2>
+                <div id="timer" class="text-2xl font-bold bg-red-600 text-white py-2 px-4 rounded-lg">45:00</div>
+            </div>
+            <div id="quizContainer">
+                <div id="questionHeader" class="text-xl font-semibold mb-4">Pregunta X de 20</div>
+                <p id="questionText" class="text-2xl mb-6">Este es el texto de la pregunta?</p>
+                <div id="answerOptions" class="space-y-4">
+                    <!-- Las opciones se generarán aquí -->
+                </div>
+            </div>
+             <div class="mt-8 flex justify-between">
+                <button id="prevQuestionBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300">Anterior</button>
+                <button id="nextQuestionBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300">Siguiente</button>
+                <button id="finishQuizBtn" class="hidden bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300">Finalizar y Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Screen (Pass) -->
+    <div id="resultsScreen" class="hidden min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-700 to-gray-800 text-white p-6">
+        <div class="max-w-2xl w-full bg-gray-900 bg-opacity-70 rounded-2xl shadow-2xl p-8 text-center backdrop-blur-sm">
+            <h1 class="text-4xl font-bold mb-4">¡Evaluación Completada!</h1>
+            <p class="text-xl mb-2">Estudiante: <span id="resultStudentName" class="font-bold"></span></p>
+            <div class="bg-white text-gray-800 rounded-lg p-6 my-6">
+                <p class="text-2xl mb-2">Tu Puntuación:</p>
+                <p class="text-6xl font-bold"><span id="resultScore"></span></p>
+                <p class="text-3xl font-semibold text-green-600">APROBADO (<span id="resultPercentage"></span>%)</p>
+            </div>
+            <p class="text-lg text-yellow-300">"Tu puntuación ha sido registrada. Por favor, toma una captura de pantalla de esta página para tus registros."</p>
+            <div id="emailNotification" class="mt-4"></div>
+            <button id="reviewAnswersBtnPass" class="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg text-lg">Revisar Respuestas</button>
+        </div>
+    </div>
+    
+    <!-- Retry Screen (Fail) -->
+    <div id="retryScreen" class="hidden min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-red-800 to-gray-900 text-white p-6">
+        <div class="max-w-2xl w-full bg-gray-900 bg-opacity-70 rounded-2xl shadow-2xl p-8 text-center backdrop-blur-sm">
+            <h1 class="text-4xl font-bold mb-4">Resultado de la Evaluación</h1>
+            <p class="text-xl mb-2">Estudiante: <span id="retryStudentName" class="font-bold"></span></p>
+            <div class="bg-white text-gray-800 rounded-lg p-6 my-6">
+                <p class="text-2xl mb-2">Tu Puntuación:</p>
+                <p class="text-6xl font-bold"><span id="retryScore"></span></p>
+                <p class="text-3xl font-semibold text-red-600">NO APROBADO (<span id="retryPercentage"></span>%)</p>
+            </div>
+            <p class="text-lg text-yellow-300">"No has alcanzado la puntuación mínima de 70. Debes realizar la evaluación nuevamente para continuar."</p>
+            <div class="flex gap-4 justify-center">
+                <button id="reviewAnswersBtnFail" class="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg text-lg">Revisar Respuestas</button>
+                <button id="retakeEvaluationBtn" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg">Repetir Evaluación</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Review Answers Screen -->
+    <div id="reviewAnswersScreen" class="hidden p-6 md:p-10 bg-gray-100 min-h-screen">
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8">
+            <h1 class="text-4xl font-bold text-center mb-6">Revisión de la Evaluación</h1>
+            <div id="reviewQuestionsContainer" class="space-y-8">
+                <!-- Review content will be dynamically inserted here -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="backToResultsBtn" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-lg text-lg">Volver a Resultados</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl text-center max-w-md mx-4">
+            <h3 class="text-2xl font-bold mb-4">¿Estás seguro?</h3>
+            <p class="text-lg mb-6">Estás a punto de comenzar la evaluación cronometrada de 45 minutos. <br>No podrás volver al material de repaso una vez que comiences.</p>
+            <div class="flex justify-center gap-4">
+                <button id="cancelEvalBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg">Cancelar</button>
+                <button id="startEvalBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg">Comenzar Evaluación</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Custom Alert Modal -->
+    <div id="alertModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-4">
+            <p id="alertMessage" class="text-lg mb-6"></p>
+            <button id="alertOkBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-lg">OK</button>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // NOTE: A real professor account with this email is needed for the download button logic.
+        const PROFESSOR_EMAIL = "otonielvelez@gmail.com";
+        const studentData = [
+            { fullName: "Algarrobo Mateo, Anderson Eliesel", lastNames: ["algarrobo", "mateo"], matricula: "100400632", email: "anderson1498@hotmail.com" },
+            { fullName: "Bereguete Mendez, Adrian", lastNames: ["bereguete", "mendez"], matricula: "bb7581", email: "bereal_32@hotmail.com" },
+            { fullName: "Borges Geronimo, Jose Eduardo", lastNames: ["borges", "geronimo"], matricula: "100587009", email: "joseborgesgeronimo21@gmail.com" },
+            { fullName: "Cabrera Martinez, Deivi A.", lastNames: ["cabrera", "martinez"], matricula: "100211825", email: "cabrera.deivi.40@gmail.com" },
+            { fullName: "De Los Santos Zapata, Mateo", lastNames: ["de los santos", "zapata"], matricula: "ad8044", email: "Ing.mateomsz@hotmail.com" },
+            { fullName: "Martinez Bonelly, Angel R.", lastNames: ["martinez", "bonelly"], matricula: "863324", email: "renecristiano@gmail.com" },
+            { fullName: "Medina Feliz, Keurin", lastNames: ["medina", "feliz"], matricula: "bc2218", email: "BC2218@uasd.edu.do" },
+            { fullName: "Sierra De La Cruz, Moraima", lastNames: ["sierra", "de la cruz"], matricula: "100585532", email: "moraimasierracruz@gmail.com" },
+            { fullName: "Suero Terrero, Eric Neftaly", lastNames: ["suero", "terrero"], matricula: "100619007", email: "ericneftalysuero5@gmail.com" },
+            { fullName: "Tolentino Rodriguez, Joellyn E.", lastNames: ["tolentino", "rodriguez"], matricula: "100102917", email: "ernesto_tolentino@outlook.com" },
+            { fullName: "Ureña Aquino, Nathanael", lastNames: ["ureña", "aquino"], matricula: "100239380", email: "Nathanael9521@gmail.com" },
+            // Add professor as a user to allow login and button visibility
+            { fullName: "Profesor Otoniel Velez", lastNames: ["velez"], matricula: "profesor", email: PROFESSOR_EMAIL }
+        ];
+
+        const beginReviewBtn = document.getElementById('beginReviewBtn');
+        const proceedToEvalBtn = document.getElementById('proceedToEvalBtn');
+        const downloadResultsBtn = document.getElementById('downloadResultsBtn');
+        
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const reviewModule = document.getElementById('reviewModule');
+        const evaluationModule = document.getElementById('evaluationModule');
+        const resultsScreen = document.getElementById('resultsScreen');
+        const retryScreen = document.getElementById('retryScreen');
+        const reviewAnswersScreen = document.getElementById('reviewAnswersScreen');
+        
+        const confirmationModal = document.getElementById('confirmationModal');
+        const cancelEvalBtn = document.getElementById('cancelEvalBtn');
+        const startEvalBtn = document.getElementById('startEvalBtn');
+
+        const alertModal = document.getElementById('alertModal');
+        const alertMessage = document.getElementById('alertMessage');
+        const alertOkBtn = document.getElementById('alertOkBtn');
+        
+        const retakeEvaluationBtn = document.getElementById('retakeEvaluationBtn');
+        
+        const lastNameInput = document.getElementById('lastNameInput');
+        const matriculaInput = document.getElementById('matriculaInput');
+        const loginError = document.getElementById('loginError');
+
+        let selectedStudent = null;
+        let timerInterval;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let randomizedQuestions = [];
+        let finalScore = 0;
+        const totalQuizQuestions = 20;
+
+        function customAlert(message) {
+            alertMessage.textContent = message;
+            alertModal.classList.remove('hidden');
+        }
+
+        alertOkBtn.addEventListener('click', () => {
+            alertModal.classList.add('hidden');
+        });
+        
+        beginReviewBtn.addEventListener('click', () => {
+            const enteredLastName = lastNameInput.value.trim().toLowerCase();
+            const enteredMatricula = matriculaInput.value.trim().toLowerCase();
+
+            if (!enteredLastName || !enteredMatricula) {
+                loginError.textContent = "Ambos campos son obligatorios.";
+                loginError.classList.remove('hidden');
+                return;
+            }
+            
+            const student = studentData.find(s => 
+                s.matricula.toLowerCase() === enteredMatricula &&
+                s.lastNames.includes(enteredLastName)
+            );
+
+            if (student) {
+                selectedStudent = student;
+                loginError.classList.add('hidden');
+
+                if (student.email === PROFESSOR_EMAIL) {
+                    downloadResultsBtn.classList.remove('hidden');
+                    customAlert('Bienvenido, Profesor. El botón para descargar resultados está ahora visible.');
+                } else {
+                    welcomeScreen.classList.add('hidden');
+                    reviewModule.classList.remove('hidden');
+                    renderMathInElement(reviewModule);
+                }
+            } else {
+                loginError.textContent = "Apellido o matrícula incorrectos. Por favor, intente de nuevo.";
+                loginError.classList.remove('hidden');
+            }
+        });
+
+        proceedToEvalBtn.addEventListener('click', () => confirmationModal.classList.remove('hidden'));
+        cancelEvalBtn.addEventListener('click', () => confirmationModal.classList.add('hidden'));
+
+        startEvalBtn.addEventListener('click', () => {
+            confirmationModal.classList.add('hidden');
+            reviewModule.classList.add('hidden');
+            evaluationModule.classList.remove('hidden');
+            startEvaluation();
+        });
+        
+        retakeEvaluationBtn.addEventListener('click', () => location.reload());
+
+        const questionBank = [
+            {
+                pregunta: "¿Un radiador de coche es un ejemplo de qué tipo de sistema?",
+                opciones: ["Sistema Abierto (Volumen de Control)", "Sistema Cerrado (Masa de Control)", "Sistema Aislado", "Sistema Adiabático"],
+                respuesta: "Sistema Abierto (Volumen de Control)"
+            },
+            {
+                pregunta: "Verdadero o Falso: Para que un sistema esté en equilibrio termodinámico, solo necesita estar en equilibrio térmico con su entorno.",
+                opciones: ["Verdadero", "Falso"],
+                respuesta: "Falso"
+            },
+            {
+                pregunta: "Una propiedad que depende del tamaño o la extensión del sistema se llama:",
+                opciones: ["Propiedad intensiva", "Propiedad extensiva", "Propiedad específica", "Postulado de estado"],
+                respuesta: "Propiedad extensiva"
+            },
+            {
+                pregunta: "Presión, Temperatura y Densidad son ejemplos de:",
+                opciones: ["Propiedades intensivas", "Propiedades extensivas", "Funciones de trayectoria", "Energía cinética"],
+                respuesta: "Propiedades intensivas"
+            },
+            {
+                pregunta: "Para un sistema cerrado que experimenta un proceso sin cambios en la energía cinética o potencial, la Primera Ley de la Termodinámica se expresa como:",
+                opciones: ["Q - W = ΔH", "Q - W = ΔU", "Q = W", "W = ΔU"],
+                respuesta: "Q - W = ΔU"
+            },
+            {
+                pregunta: "Una turbina es un dispositivo que principalmente...",
+                opciones: ["Consume trabajo para aumentar la presión del fluido.", "Transfiere calor entre dos fluidos.", "Produce trabajo al expandir un fluido.", "Restringe el flujo del fluido."],
+                respuesta: "Produce trabajo al expandir un fluido."
+            },
+            {
+                pregunta: "En una válvula de estrangulamiento de flujo estacionario y abierto, ¿qué propiedad se asume que permanece constante durante el proceso?",
+                opciones: ["Presión", "Temperatura", "Entropía", "Entalpía"],
+                respuesta: "Entalpía"
+            },
+            {
+                pregunta: "Verdadero o Falso: En un intercambiador de calor de flujo estacionario, no se realiza trabajo.",
+                opciones: ["Verdadero", "Falso"],
+                respuesta: "Verdadero"
+            },
+            {
+                pregunta: "La propiedad combinada H = U + PV se llama:",
+                opciones: ["Energía Interna", "Entropía", "Entalpía", "Energía Libre de Gibbs"],
+                respuesta: "Entalpía"
+            },
+            {
+                pregunta: "El enunciado de Kelvin-Planck de la Segunda Ley establece que es imposible que un dispositivo que opera en un ciclo...",
+                opciones: ["Transfiera calor de un cuerpo de baja temperatura a uno de alta temperatura.", "Produzca trabajo neto mientras intercambia calor con un solo depósito.", "Convierta todo el calor de entrada en trabajo.", "Ambas 'Produzca trabajo neto...' y 'Convierta todo el calor...' son correctas."],
+                respuesta: "Ambas 'Produzca trabajo neto...' y 'Convierta todo el calor...' son correctas."
+            },
+            {
+                pregunta: "El rendimiento de una máquina de refrigeración se mide por su:",
+                opciones: ["Eficiencia Térmica (η)", "Coeficiente de Desempeño (COP)", "Eficiencia Isentrópica", "Factor de Carnot"],
+                respuesta: "Coeficiente de Desempeño (COP)"
+            },
+            {
+                pregunta: "Verdadero o Falso: La eficiencia de un motor térmico puede ser del 100%.",
+                opciones: ["Verdadero", "Falso"],
+                respuesta: "Falso"
+            },
+            {
+                pregunta: "El enunciado de Clausius de la Segunda Ley está relacionado con:",
+                opciones: ["Motores Térmicos", "Refrigeradores y Bombas de Calor", "Toberas y Difusores", "Solo sistemas cerrados"],
+                respuesta: "Refrigeradores y Bombas de Calor"
+            },
+            {
+                pregunta: "El estado de una sustancia desde el cual comienza o termina un cambio de fase se llama:",
+                opciones: ["Estado sobrecalentado", "Estado comprimido", "Estado saturado", "Punto crítico"],
+                respuesta: "Estado saturado"
+            },
+            {
+                pregunta: "Para un gas ideal, la energía interna (U) es una función de solo:",
+                opciones: ["Presión", "Volumen", "Temperatura", "Masa"],
+                respuesta: "Temperatura"
+            },
+            {
+                pregunta: "Verdadero o Falso: La calidad (x) puede ser mayor que 1 para una mezcla saturada.",
+                opciones: ["Verdadero", "Falso"],
+                respuesta: "Falso"
+            },
+            {
+                pregunta: "Una tobera es un dispositivo de flujo estacionario que se utiliza para:",
+                opciones: ["Aumentar la velocidad del fluido a expensas de la presión", "Aumentar la presión del fluido a expensas de la velocidad", "Producir trabajo", "Transferir calor"],
+                respuesta: "Aumentar la velocidad del fluido a expensas de la presión"
+            },
+            {
+                pregunta: "La función principal de un difusor es:",
+                opciones: ["Disminuir la presión y aumentar la velocidad", "Aumentar la presión desacelerando un fluido", "Restringir el flujo isentálpicamente", "Intercambiar calor entre fluidos"],
+                respuesta: "Aumentar la presión desacelerando un fluido"
+            },
+            {
+                pregunta: "Para un rango de temperatura dado, el COP de una bomba de calor es siempre:",
+                opciones: ["Igual al COP de un refrigerador", "Uno menos que el COP de un refrigerador", "Uno más que el COP de un refrigerador", "Menor que 1"],
+                respuesta: "Uno más que el COP de un refrigerador"
+            },
+            {
+                pregunta: "Un sistema que no intercambia calor con su entorno se llama:",
+                opciones: ["Isotérmico", "Isobárico", "Adiabático", "Aislado"],
+                respuesta: "Adiabático"
+            },
+            { pregunta: "Verdadero o Falso: En un sistema aislado, ni la masa ni la energía pueden cruzar la frontera.", opciones: ["Verdadero", "Falso"], respuesta: "Verdadero" },
+            { pregunta: "El volumen específico es el recíproco de:", opciones: ["Presión", "Densidad", "Temperatura", "Masa"], respuesta: "Densidad" },
+            { pregunta: "El punto en el que los estados de líquido saturado y vapor saturado son idénticos es el:", opciones: ["Punto triple", "Punto crítico", "Punto de ebullición", "Punto de sublimación"], respuesta: "Punto crítico" },
+            { pregunta: "El trabajo realizado sobre un sistema generalmente se considera:", opciones: ["Positivo", "Negativo", "Cero", "Dependiente del calor"], respuesta: "Negativo" },
+            { pregunta: "La transferencia de calor desde un sistema generalmente se considera:", opciones: ["Positiva", "Negativa", "Cero", "Dependiente del trabajo"], respuesta: "Negativa" },
+            { pregunta: "Para un compresor de flujo estacionario, el trabajo de entrada se destina principalmente a aumentar la del fluido:", opciones: ["Velocidad", "Entalpía", "Solo energía interna", "Volumen"], respuesta: "Entalpía" },
+            { pregunta: "Verdadero o Falso: Todos los procesos reversibles son idealizaciones y no ocurren en la naturaleza.", opciones: ["Verdadero", "Falso"], respuesta: "Verdadero" },
+            { pregunta: "¿Cuál de los siguientes NO es una consecuencia de la Segunda Ley?", opciones: ["La energía tiene calidad", "Los procesos tienen direccionalidad", "La energía se conserva", "La entropía del universo aumenta"], respuesta: "La energía se conserva" },
+            { pregunta: "El ciclo más eficiente posible para un motor térmico que opera entre dos temperaturas es el:", opciones: ["Ciclo Otto", "Ciclo Diesel", "Ciclo Rankine", "Ciclo Carnot"], respuesta: "Ciclo Carnot" },
+            { pregunta: "Para un gas ideal que experimenta un proceso isotérmico, el cambio en la energía interna es:", opciones: ["Positivo", "Negativo", "Cero", "No se puede determinar"], respuesta: "Cero" },
+            { pregunta: "Un proceso sin cambio de presión se llama:", opciones: ["Isocórico", "Isotérmico", "Isobárico", "Adiabático"], respuesta: "Isobárico" },
+            { pregunta: "Un proceso sin cambio de volumen se llama:", opciones: ["Isocórico", "Isotérmico", "Isobárico", "Adiabático"], respuesta: "Isocórico" },
+            { pregunta: "Verdadero o Falso: La energía de un sistema aislado siempre permanece constante.", opciones: ["Verdadero", "Falso"], respuesta: "Verdadero" },
+            { pregunta: "En ausencia de fricción y otras irreversibilidades, se dice que un proceso es:", opciones: ["Reversible", "Isentrópico", "Adiabático", "Isotérmico"], respuesta: "Reversible" },
+            { pregunta: "La energía requerida para vaporizar una unidad de masa de líquido saturado se llama:", opciones: ["Entalpía de fusión", "Entalpía de vaporización", "Calor específico", "Energía interna de vaporización"], respuesta: "Entalpía de vaporización" },
+            { pregunta: "¿Qué significa un Coeficiente de Desempeño (COP) mayor que 1 para una bomba de calor?", opciones: ["Es imposible", "Viola la primera ley", "Transfiere más calor que el trabajo que consume", "Es 100% eficiente"], respuesta: "Transfiere más calor que el trabajo que consume" },
+            { pregunta: "Verdadero o Falso: La presión de un gas en un recipiente se debe a las colisiones de las moléculas con las paredes.", opciones: ["Verdadero", "Falso"], respuesta: "Verdadero" },
+            { pregunta: "El trabajo de frontera (Wb) solo está presente para:", opciones: ["Sistemas abiertos", "Sistemas con fronteras móviles", "Tanques rígidos", "Sistemas adiabáticos"], respuesta: "Sistemas con fronteras móviles" },
+            { pregunta: "Para una sustancia pura, la presión y la temperatura son propiedades dependientes en qué región?", opciones: ["Líquido comprimido", "Vapor sobrecalentado", "Mezcla saturada", "Gas ideal"], respuesta: "Mezcla saturada" },
+            { pregunta: "Una máquina de movimiento perpetuo de primera especie (PMM1) es una máquina que viola la:", opciones: ["Primera Ley de la Termodinámica", "Segunda Ley de la Termodinámica", "Ley Cero de la Termodinámica", "Ley del Gas Ideal"], respuesta: "Primera Ley de la Termodinámica" }
+        ];
+
+        function startEvaluation() {
+            randomizedQuestions = questionBank.sort(() => 0.5 - Math.random()).slice(0, totalQuizQuestions);
+            currentQuestionIndex = 0;
+            userAnswers = new Array(totalQuizQuestions).fill(null);
+            displayQuestion();
+            startTimer(45 * 60);
+        }
+
+        function displayQuestion() {
+            const question = randomizedQuestions[currentQuestionIndex];
+            document.getElementById('questionHeader').textContent = `Pregunta ${currentQuestionIndex + 1} de ${totalQuizQuestions}`;
+            document.getElementById('questionText').textContent = question.pregunta;
+
+            const answerOptionsDiv = document.getElementById('answerOptions');
+            answerOptionsDiv.innerHTML = '';
+            
+            question.opciones.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('block', 'w-full', 'text-left', 'p-4', 'rounded-lg', 'border', 'border-gray-300', 'hover:bg-blue-100', 'transition-colors');
+                if (userAnswers[currentQuestionIndex] === option) {
+                    button.classList.add('bg-blue-500', 'text-white', 'border-blue-500');
+                }
+                button.onclick = () => selectAnswer(option, button);
+                answerOptionsDiv.appendChild(button);
+            });
+            
+            document.getElementById('prevQuestionBtn').classList.toggle('hidden', currentQuestionIndex === 0);
+            const isLastQuestion = currentQuestionIndex === totalQuizQuestions - 1;
+            document.getElementById('nextQuestionBtn').classList.toggle('hidden', isLastQuestion);
+            document.getElementById('finishQuizBtn').classList.toggle('hidden', !isLastQuestion);
+        }
+        
+        function selectAnswer(option, button) {
+            userAnswers[currentQuestionIndex] = option;
+            const buttons = document.getElementById('answerOptions').querySelectorAll('button');
+            buttons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white', 'border-blue-500'));
+            button.classList.add('bg-blue-500', 'text-white', 'border-blue-500');
+        }
+        
+        document.getElementById('prevQuestionBtn').addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        });
+
+        document.getElementById('nextQuestionBtn').addEventListener('click', () => {
+             if (userAnswers[currentQuestionIndex] === null) {
+                customAlert("Por favor, seleccione una respuesta antes de continuar.");
+                return;
+            }
+            if (currentQuestionIndex < totalQuizQuestions - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            }
+        });
+
+        document.getElementById('finishQuizBtn').addEventListener('click', () => {
+             if (userAnswers.includes(null)) {
+                customAlert("Por favor, responda todas las preguntas antes de finalizar.");
+                return;
+            }
+            finishQuiz();
+        });
+
+        function startTimer(duration) {
+            let timer = duration, minutes, seconds;
+            const timerEl = document.getElementById('timer');
+            
+            timerInterval = setInterval(() => {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                timerEl.textContent = minutes + ":" + seconds;
+                if (--timer < 0) {
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+        
+        function sendEmailToProfessor() {
+            const professorEmail = PROFESSOR_EMAIL;
+            const subject = `Resultado Aprobado de Evaluación de Termodinámica: ${selectedStudent.fullName}`;
+            const percentage = ((finalScore / totalQuizQuestions) * 100).toFixed(1);
+            const body = `El siguiente estudiante ha completado y aprobado la evaluación de prerrequisitos de Termodinámica II:\n\n` +
+                         `Estudiante: ${selectedStudent.fullName}\n` +
+                         `Matrícula: ${selectedStudent.matricula}\n`+
+                         `Correo: ${selectedStudent.email}\n` +
+                         `Puntuación: ${finalScore} / ${totalQuizQuestions}\n` +
+                         `Porcentaje: ${percentage}%\n\n` +
+                         `Esta es una notificación automática.`;
+            
+            const mailtoLink = `mailto:${professorEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            const emailDiv = document.getElementById('emailNotification');
+            const link = document.createElement('a');
+            link.href = mailtoLink;
+            link.textContent = 'Haga clic aquí para notificar al profesor de su resultado.';
+            link.target = "_blank";
+            link.classList.add('text-blue-300', 'underline', 'hover:text-blue-400');
+            emailDiv.innerHTML = '<p class="mt-4">Por favor, notifique al profesor sobre su resultado para que quede registrado.</p>';
+            emailDiv.appendChild(link);
+        }
+
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            let score = 0;
+            randomizedQuestions.forEach((q, index) => {
+                if (q.respuesta === userAnswers[index]) {
+                    score++;
+                }
+            });
+            finalScore = score;
+            const percentage = ((score / totalQuizQuestions) * 100);
+            
+            // Save results to localStorage
+            let results = JSON.parse(localStorage.getItem('studentResults')) || [];
+            // Avoid duplicate entries for the same session/student
+            results = results.filter(r => r.matricula !== selectedStudent.matricula);
+            results.push({
+                name: selectedStudent.fullName,
+                matricula: selectedStudent.matricula,
+                score: `${finalScore} / ${totalQuizQuestions}`,
+                percentage: percentage.toFixed(1) + '%'
+            });
+            localStorage.setItem('studentResults', JSON.stringify(results));
+
+
+            evaluationModule.classList.add('hidden');
+
+            if (percentage >= 70) {
+                document.getElementById('resultStudentName').textContent = selectedStudent.fullName;
+                document.getElementById('resultScore').textContent = `${score} / ${totalQuizQuestions}`;
+                document.getElementById('resultPercentage').textContent = percentage.toFixed(1);
+                resultsScreen.classList.remove('hidden');
+                sendEmailToProfessor();
+            } else {
+                document.getElementById('retryStudentName').textContent = selectedStudent.fullName;
+                document.getElementById('retryScore').textContent = `${score} / ${totalQuizQuestions}`;
+                document.getElementById('retryPercentage').textContent = percentage.toFixed(1);
+                retryScreen.classList.remove('hidden');
+            }
+        }
+        
+        function displayReview() {
+            const container = document.getElementById('reviewQuestionsContainer');
+            container.innerHTML = ''; // Clear previous review
+            
+            randomizedQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = q.respuesta === userAnswer;
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'p-6 rounded-lg border';
+                questionDiv.className += isCorrect ? ' border-green-400 bg-green-50' : ' border-red-400 bg-red-50';
+
+                questionDiv.innerHTML = `<h3 class="text-xl font-semibold mb-4">Pregunta ${index + 1}: ${q.pregunta}</h3>`;
+                
+                const optionsList = document.createElement('ul');
+                optionsList.className = 'space-y-3';
+                
+                q.opciones.forEach(option => {
+                    const li = document.createElement('li');
+                    li.className = 'p-3 rounded-md flex items-center';
+                    let indicator = '';
+
+                    // Highlight correct answer
+                    if (option === q.respuesta) {
+                        li.classList.add('bg-green-200', 'font-semibold');
+                        indicator = `<span class="text-green-700 mr-2">&#10003; (Correcta)</span>`;
+                    }
+                    
+                    // Highlight user's incorrect answer
+                    if (option === userAnswer && !isCorrect) {
+                         li.classList.add('bg-red-200', 'line-through');
+                         indicator = `<span class="text-red-700 mr-2">&#10007; (Tu respuesta)</span>`;
+                    } else if (option === userAnswer && isCorrect) {
+                         indicator = `<span class="text-green-700 mr-2">&#10003; (Tu respuesta)</span>`;
+                    }
+                    
+                    li.innerHTML = `${indicator} ${option}`;
+                    optionsList.appendChild(li);
+                });
+                
+                questionDiv.appendChild(optionsList);
+                if (userAnswer === null) {
+                    const noAnswerP = document.createElement('p');
+                    noAnswerP.className = 'mt-3 text-yellow-700 font-semibold';
+                    noAnswerP.textContent = 'No se seleccionó respuesta.';
+                    questionDiv.appendChild(noAnswerP);
+                }
+                container.appendChild(questionDiv);
+            });
+            
+            resultsScreen.classList.add('hidden');
+            retryScreen.classList.add('hidden');
+            reviewAnswersScreen.classList.remove('hidden');
+        }
+        
+        function downloadResultsCSV() {
+            const results = JSON.parse(localStorage.getItem('studentResults')) || [];
+            if (results.length === 0) {
+                customAlert('Aún no hay resultados para descargar.');
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,Nombre,Matrícula,Calificación,Porcentaje\n";
+
+            results.forEach(row => {
+                let rowArray = [`"${row.name}"`, `"${row.matricula}"`, `"${row.score}"`, `"${row.percentage}"`];
+                csvContent += rowArray.join(",") + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "resultados_termodinamica.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        downloadResultsBtn.addEventListener('click', downloadResultsCSV);
+        document.getElementById('reviewAnswersBtnPass').addEventListener('click', displayReview);
+        document.getElementById('reviewAnswersBtnFail').addEventListener('click', displayReview);
+        
+        document.getElementById('backToResultsBtn').addEventListener('click', () => {
+            reviewAnswersScreen.classList.add('hidden');
+            const percentage = (finalScore / totalQuizQuestions) * 100;
+            if (percentage >= 70) {
+                resultsScreen.classList.remove('hidden');
+            } else {
+                retryScreen.classList.remove('hidden');
+            }
+        });
+
+        function renderMathInElement(element) {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(element, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+    });
+    </script>
+</body>
+</html>
+
